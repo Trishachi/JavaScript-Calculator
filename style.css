@@ -1,0 +1,14 @@
+* {
+    box-sizing: border-box;
+}
+
+body { 
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Red Rose', cursive;
+    background: #ccc;
+}
