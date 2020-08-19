@@ -18,12 +18,12 @@
     <div class="container card" id="calculator">
         <div class="results">
             <div id="history" class="text-right font-italic">History goes here</div>
-            <div id="display" class="text-right">Display goes here</div>
+            <div id="display" class="text-right">0</div>
         </div>
         <div class="row">
             <button id="clear" class="col btn calc-btn clear">CE</button>
-            <button id="backspace" class="col btn calc-btn operator font-weight-bold"><i
-                    class="fas fa-backspace"></i></button>
+            <button id="backspace" class="col btn calc-btn operator font-weight-bold"><i id="backsp"
+                    class="fas fa-backspace operator"></i></button>
             <button id="divide" class="col btn calc-btn operator">&#247;</button>
         </div>
         <div class="row">
@@ -46,9 +46,9 @@
         </div>
         <div class="row">
             <button id="zero" class="col btn calc-btn number">0</button>
-            <button id="negative" class="col btn calc-btn font-weight-bold number">&#8723;</button>
-            <button id="decimal" class="col btn calc-btn number">.</button>
-            <button id="equals" class="col btn calc-btn equal">=</button>
+            <button id="negative" class="col btn calc-btn font-weight-bold negative">&#8723;</button>
+            <button id="decimal" class="col btn calc-btn decimal">.</button>
+            <button id="equals" class="col btn calc-btn equal operator">=</button>
         </div>
     </div>
     <footer class="footer text-center">
