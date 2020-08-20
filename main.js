@@ -14,15 +14,56 @@ let updateDisplay = (event) => {
   resultDisplay.innerText = displayValue;
 };
 
+let performOperation = (event) => {
+  let operator = event.target.innerText;
+  switch (operator) {
+    case "+":
+      history = displayValue;
+      displayValue = "0";
+      resultDisplay.innerText = displayValue;
+      stringArr.push(history);
+      stringArr.push("+");
+      break;
+    case "-":
+      history = displayValue;
+      displayValue = "0";
+      resultDisplay.innerText = displayValue;
+      stringArr.push(history);
+      stringArr.push("-");
+      break;
+    case "x":
+      history = displayValue;
+      displayValue = "0";
+      resultDisplay.innerText = displayValue;
+      stringArr.push(history);
+      stringArr.push("*");
+      break;
+    case "÷":
+      history = displayValue;
+      displayValue = "0";
+      resultDisplay.innerText = displayValue;
+      stringArr.push(history);
+      stringArr.push("/");
+      break;
+    case "=":
+      stringArr.push(displayValue);
+      let evaluation = eval(stringArr.join(" "));
+      displayValue = evaluation + "";
+      resultDisplay.innerText = displayValue;
+      stringArr = [];
+    default:
+      break;
+  }
+};
+
 calculator.addEventListener("click", function (event) {
   if (event.target.classList.contains("number")) {
     updateDisplay(event);
   }
-  //   if (event.target.classList.contains("operator")) {
-  //     performOperation();
-  //   }
+  if (event.target.classList.contains("operator")) {
+    performOperation(event);
+  }
   if (event.target.id === "clear") {
-    // console.log("Clear Button Clicked");
     displayValue = "0";
     history = undefined;
     stringArr = [];
@@ -36,5 +77,11 @@ calculator.addEventListener("click", function (event) {
       displayValue = "0";
     }
     resultDisplay.innerText = displayValue;
+  }
+  if (event.target.classList.contains("decimal")) {
+    if (!displayValue.includes(".")) {
+      displayValue += ".";
+      resultDisplay.innerText = displayValue;
+    }
   }
 });
