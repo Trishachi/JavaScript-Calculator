@@ -28,12 +28,23 @@ h1.title {
   padding: 20px;
 }
 
-.btn {
+/* .btn {
   background: #1e2126;
   width: 30px;
   height: 40px;
   margin: 10px;
   border-radius: 50px;
+} */
+
+button.btn {
+  background: #1e2126;
+  width: 30px;
+  height: 40px;
+  margin: 10px;
+  border-radius: 50px;
+}
+
+button.btn:hover {
 }
 
 .btn.number,

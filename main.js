@@ -1,14 +1,18 @@
 let displayValue = "0";
 let history;
 let stringArr = [];
+let evaluated = false;
 
 let resultDisplay = document.getElementById("display");
 
 let updateDisplay = (event) => {
   let btnValue = event.target.innerText;
-
   if (displayValue === "0") {
     displayValue = "";
+  }
+  if (evaluated === true) {
+    displayValue = "";
+    evaluated = false;
   }
   displayValue += btnValue;
   resultDisplay.innerText = displayValue;
@@ -54,6 +58,7 @@ let performOperation = (event) => {
     default:
       break;
   }
+  evaluated = true;
 };
 
 calculator.addEventListener("click", function (event) {
@@ -70,7 +75,6 @@ calculator.addEventListener("click", function (event) {
     resultDisplay.innerText = displayValue;
   }
   if (event.target.id === "backspace" || event.target.id === "backsp") {
-    console.log("BS Clicked");
     let displayLength = displayValue.length;
     displayValue = displayValue.slice(0, displayLength - 1);
     if (displayValue === "") {
@@ -81,6 +85,12 @@ calculator.addEventListener("click", function (event) {
   if (event.target.classList.contains("decimal")) {
     if (!displayValue.includes(".")) {
       displayValue += ".";
+      resultDisplay.innerText = displayValue;
+    }
+  }
+  if (event.target.classList.contains("negative")) {
+    if (!displayValue == "0") {
+      displayValue = -displayValue;
       resultDisplay.innerText = displayValue;
     }
   }
