@@ -2,8 +2,10 @@ let displayValue = "0";
 let history;
 let stringArr = [];
 let evaluated = false;
+let operators = /[*/+-]/;
 
 let resultDisplay = document.getElementById("display");
+// let historyDisplay = document.getElementById("history");
 
 let updateDisplay = (event) => {
   let btnValue = event.target.innerText;
@@ -16,10 +18,16 @@ let updateDisplay = (event) => {
   }
   displayValue += btnValue;
   resultDisplay.innerText = displayValue;
+  // historyDisplay.innerText = stringArr;
 };
 
 let performOperation = (event) => {
   let operator = event.target.innerText;
+  // console.log(stringArr);
+  // console.log(stringArr[stringArr.length - 1]);
+  // if (operators.test(stringArr[stringArr.length - 1])) {
+  //   stringArr.pop();
+  // }
   switch (operator) {
     case "+":
       history = displayValue;
