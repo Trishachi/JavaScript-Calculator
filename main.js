@@ -4,6 +4,7 @@ let stringArr = [];
 let evaluated = false;
 let operators = /[*/+-]/;
 
+let calculator = document.getElementById("calculator");
 let resultDisplay = document.getElementById("display");
 // let historyDisplay = document.getElementById("history");
 
@@ -57,16 +58,9 @@ let performOperation = (event) => {
       stringArr.push(history);
       stringArr.push("/");
       break;
-    case "=":
-      stringArr.push(displayValue);
-      let evaluation = eval(stringArr.join(" "));
-      displayValue = evaluation + "";
-      resultDisplay.innerText = displayValue;
-      stringArr = [];
     default:
       break;
   }
-  evaluated = true;
 };
 
 calculator.addEventListener("click", function (event) {
@@ -101,5 +95,13 @@ calculator.addEventListener("click", function (event) {
       displayValue = -displayValue;
       resultDisplay.innerText = displayValue;
     }
+  }
+  if (event.target.id === "equals") {
+    stringArr.push(displayValue);
+    let evaluation = eval(stringArr.join(" "));
+    displayValue = evaluation + "";
+    resultDisplay.innerText = displayValue;
+    stringArr = [];
+    evaluated = true;
   }
 });
