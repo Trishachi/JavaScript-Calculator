@@ -3,7 +3,6 @@ let pendingVal;
 let stringArr = [];
 let evaluated = false;
 let operators = /[*/+-]/;
-let reset = "0";
 
 let calculator = document.getElementById("calculator");
 let resultDisplay = document.getElementById("display");
@@ -45,7 +44,6 @@ let performOperation = (event) => {
       pendingVal = displayValue;
       displayValue = "0";
       resultDisplay.innerText = displayValue;
-      console.log(stringArr[stringArr.length - 1]);
       if (pendingVal != "0") {
         stringArr.push(pendingVal);
       }
@@ -77,7 +75,6 @@ let performOperation = (event) => {
     default:
       break;
   }
-  console.log(stringArr);
 };
 
 calculator.addEventListener("click", function (event) {
@@ -121,7 +118,6 @@ calculator.addEventListener("click", function (event) {
     let evaluation = eval(stringArr.join(" "));
     displayValue = evaluation + "";
     resultDisplay.innerText = displayValue;
-    console.log(stringArr);
     stringArr = [];
     evaluated = true;
   }
