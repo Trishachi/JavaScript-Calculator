@@ -71,6 +71,12 @@ button.btn:hover {
   padding: 10px 0;
 }
 
+#history {
+  min-height: 2em;
+  padding: 5px 0;
+  color: #2ab87e;
+}
+
 /* Footer Styles */
 
 footer {

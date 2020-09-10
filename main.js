@@ -1,12 +1,13 @@
 let displayValue = "0";
-let history;
+let pendingVal;
 let stringArr = [];
 let evaluated = false;
 let operators = /[*/+-]/;
+let reset = "0";
 
 let calculator = document.getElementById("calculator");
 let resultDisplay = document.getElementById("display");
-// let historyDisplay = document.getElementById("history");
+let historyDisplay = document.getElementById("history");
 
 let updateDisplay = (event) => {
   let btnValue = event.target.innerText;
@@ -19,48 +20,64 @@ let updateDisplay = (event) => {
   }
   displayValue += btnValue;
   resultDisplay.innerText = displayValue;
-  // historyDisplay.innerText = stringArr;
+};
+
+let lastDigitIsOperator = (arr) => {
+  if (operators.test(arr[arr.length - 1])) {
+    arr.pop();
+  }
 };
 
 let performOperation = (event) => {
   let operator = event.target.innerText;
-  // console.log(stringArr);
-  // console.log(stringArr[stringArr.length - 1]);
-  // if (operators.test(stringArr[stringArr.length - 1])) {
-  //   stringArr.pop();
-  // }
   switch (operator) {
     case "+":
-      history = displayValue;
+      pendingVal = displayValue;
       displayValue = "0";
       resultDisplay.innerText = displayValue;
-      stringArr.push(history);
+      if (pendingVal != "0") {
+        stringArr.push(pendingVal);
+      }
+      lastDigitIsOperator(stringArr);
       stringArr.push("+");
       break;
     case "-":
-      history = displayValue;
+      pendingVal = displayValue;
       displayValue = "0";
       resultDisplay.innerText = displayValue;
-      stringArr.push(history);
+      console.log(stringArr[stringArr.length - 1]);
+      if (pendingVal != "0") {
+        stringArr.push(pendingVal);
+      }
+      if (stringArr[stringArr.length - 1] !== "*") {
+        lastDigitIsOperator(stringArr);
+      }
       stringArr.push("-");
       break;
     case "x":
-      history = displayValue;
+      pendingVal = displayValue;
       displayValue = "0";
       resultDisplay.innerText = displayValue;
-      stringArr.push(history);
+      if (pendingVal != "0") {
+        stringArr.push(pendingVal);
+      }
+      lastDigitIsOperator(stringArr);
       stringArr.push("*");
       break;
     case "÷":
-      history = displayValue;
+      pendingVal = displayValue;
       displayValue = "0";
       resultDisplay.innerText = displayValue;
-      stringArr.push(history);
+      if (pendingVal != "0") {
+        stringArr.push(pendingVal);
+      }
+      lastDigitIsOperator(stringArr);
       stringArr.push("/");
       break;
     default:
       break;
   }
+  console.log(stringArr);
 };
 
 calculator.addEventListener("click", function (event) {
@@ -72,7 +89,7 @@ calculator.addEventListener("click", function (event) {
   }
   if (event.target.id === "clear") {
     displayValue = "0";
-    history = undefined;
+    pendingVal = undefined;
     stringArr = [];
     resultDisplay.innerText = displayValue;
   }
@@ -90,17 +107,21 @@ calculator.addEventListener("click", function (event) {
       resultDisplay.innerText = displayValue;
     }
   }
-  if (event.target.classList.contains("negative")) {
-    if (!displayValue == "0") {
-      displayValue = -displayValue;
-      resultDisplay.innerText = displayValue;
-    }
-  }
+  // if (event.target.classList.contains("negative")) {
+  //   if (!displayValue == "0") {
+  //     displayValue = -displayValue;
+  //     stringArr.push(displayValue);
+  //     resultDisplay.innerText = displayValue;
+  //   }
+  // }
   if (event.target.id === "equals") {
     stringArr.push(displayValue);
+    let history = stringArr.join(" ");
+    historyDisplay.innerText = history;
     let evaluation = eval(stringArr.join(" "));
     displayValue = evaluation + "";
     resultDisplay.innerText = displayValue;
+    console.log(stringArr);
     stringArr = [];
     evaluated = true;
   }
